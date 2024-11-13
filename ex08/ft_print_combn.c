@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_comb2.c                                   :+:      :+:    :+:   */
+/*   ft_print_combn.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lunatran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 16:38:39 by lunatran          #+#    #+#             */
-/*   Updated: 2024/11/13 16:48:29 by lunatran         ###   ########.fr       */
+/*   Created: 2024/11/13 16:50:51 by lunatran          #+#    #+#             */
+/*   Updated: 2024/11/13 19:28:32 by lunatran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include <unistd.h>
 
@@ -49,45 +50,50 @@ void ft_putnbr(int nb)
     ft_putchar(nb + '0');
 }
 
-void ft_print_numbers(int a, int b)
+void ft_print_numbers(int *a)
 {
-	if (a < 10)
-		ft_putnbr(0);
-	ft_putnbr(a);
-	ft_putchar(' ');
-	if (b < 10)
-		ft_putnbr(0);
-	ft_putnbr(b);
+	while (*a != 0)
+	{
+		if (*a < 10)
+			ft_putnbr(0);
+		ft_putnbr(*a);
+		a++;
+	}
 }
 
 
-void ft_print_comb2(void)
+void ft_print_combn(int n)
 {
-    int a; 
-    a = 0;
-    int b; 
-    b = 1;
+    	int 	a[10];
+	int 	index;
+	int	max_index;
 
-    while (a < 98)
-    {
-        while (b <= 99)
-        {
-            if (b > a)
-            {
-                ft_print_numbers(a, b);
-                ft_putstr(", ");
-            }
-            b++;
-        }
-        a++;
-        b = a + 1;
-        ft_print_numbers(a, b);
-        if (a + b != 98 + 99)
-            ft_putstr(", ");
-    }
+	index = 0;
+    	while (index < n)
+	{
+		a[index] = index;
+		index++;
+	}
+	max_index = index;
+	ft_putstr("Done");
+	while(1)
+	{
+		if (index - 1 < 9 - (max_index - index))
+		{
+			ft_print_numbers(a);
+			a[index]++;
+		}
+		else
+		{
+			index--;
+		}
+		if (index < 0)
+			break;
+	}	
+
 }
 
-/*int main()
+int main()
 {
-    ft_print_comb2();
-}*/
+    ft_print_combn(2);
+}
